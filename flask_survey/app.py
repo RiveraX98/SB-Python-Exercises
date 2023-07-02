@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request, redirect, flash
+from flask import Flask, render_template, request, redirect, flash, session
 from survey import satisfaction_survey
 app = Flask(__name__)
+app.config['SECRET_KEY'] = "key"
 
 
-responses = []
+"""responses = session["responses"]"""
 
 
 @app.route("/satisfaction")
@@ -11,9 +12,18 @@ def show_satisfaction_survey_title_page():
     return render_template("title-page.html")
 
 
+@app.route("/start", methods=["POST"])
+def start_survey():
+
+    session["responses"] = []
+
+    return redirect("/questions/0")
+
+
 @app.route("/questions/<int:num>")
 def show_questions(num):
     curr_question = satisfaction_survey.questions[num]
+    responses = session["responses"]
 
     if (responses is None):
         return redirect("/satisfaction")
@@ -32,7 +42,10 @@ def show_questions(num):
 def handle_question():
 
     answer = request.form['answer']
+
+    responses = session["responses"]
     responses.append(answer)
+    session["responses"] = responses
 
     if (len(responses) == len(satisfaction_survey.questions)):
         return redirect("/thanks")
@@ -43,5 +56,4 @@ def handle_question():
 
 @app.route("/thanks")
 def thank_user():
-
     return render_template("thanks.html")
