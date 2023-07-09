@@ -9,12 +9,12 @@ class BoggleGame {
       this.board = $("#" + boardId)
     
       this.timer = setInterval(this.setTime.bind(this), 1000);
-      $("form",this.board).on("submit",this.handleGuess.bind(this));
+      $("#guessForm").on("submit",this.handleGuess.bind(this));
      
     }
 
   showWord(word) {
-    $(".wordList").append(`<li> ${word} <li>`);
+    $(".wordList").append(`<li>${word}</li>`);
   }
 
   showScore() {
@@ -23,18 +23,27 @@ class BoggleGame {
   showTimer() {
     $(".timer").text(this.secs);
   }
+  showMessage(msg,cls){
+    $("#message",).text(msg)
+    .removeClass()
+    .addClass(cls)
+  }
 
 
   setTime() {
     this.secs -= 1;
     this.showTimer();
+    if (this.secs === 0) {
+      clearInterval(this.timer);
+      this.scoreGame()
+    }
   }
 
   async handleGuess(evt) {
- console.log(evt)
   evt.preventDefault()
+
   
-  const word = $("form",this.board).val();
+  const word = $("#guess").val();
   console.log(word)
    
   
@@ -48,20 +57,28 @@ class BoggleGame {
     console.log(res)
 
     if (res.data.result === "not-word") {
-        throw(`${word} is not a valid English word`);
+        this.showMessage(`${word} is not a valid English word`,"err");
     } 
     else if (res.data.result === "not-on-board") {
-        throw(`${word} is not a valid word on this board`);
+        this.showMessage(`${word} is not a valid word on this board`,"err");
     } 
     else {
         this.showWord(word);
         this.score += word.length;
         this.showScore();
         this.words.add(word);
+        this.showMessage(`Added: ${word}`, "ok")
+        
+
     }
-    $("form").val("")
+    $("#guess").val("")
   }
   
+scoreGame(){
+  $("#guessForm").addClass("hide");
+  this.showMessage(`Final score: ${this.score}`, "ok")
 }
 
-let game = new BoggleGame("boggle",90);
+}
+
+let game = new BoggleGame("boggle",60);
