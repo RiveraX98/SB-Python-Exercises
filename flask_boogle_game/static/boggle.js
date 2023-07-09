@@ -81,4 +81,4 @@ scoreGame(){
 
 }
 
-let game = new BoggleGame("boggle",60);
+let game = new BoggleGame("boggle",90);
