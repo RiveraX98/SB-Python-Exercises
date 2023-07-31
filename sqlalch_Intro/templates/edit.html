@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit User</title>
+  </head>
+  <body>
+    <h1>Edit user</h1>
+
+    <form action="/{{user.id}}" method="POST" >
+        First name:
+        <input
+          type="text"
+          name="first_name"
+          value="{{user.first_name}}"
+        ></input><br>
+        Last name:
+        <input
+          type="text"
+          name="last_name"
+          value="{{user.last_name}}"
+        ></input><br>
+        Photo url:
+        <input
+          type="text"
+          name="photo_url"
+          value="{{user.image_url}}"
+        ></input>
+  
+        <button>Save</button>
+
+  
+      </form>
+    <form action="/{{user.id}}"><button>Cancel</button></form>
+  </body>
+</html>
