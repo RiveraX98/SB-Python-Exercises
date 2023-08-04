@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Post</title>
+  </head>
+  <body>
+    <h1>Create New Post</h1>
+    <form action="/users/{{user_id}}/posts/new" method="POST">
+        <label for="Title">Title:</label>
+        <input type="text" name="title" placeholder="Title" > </input><br />
+
+        <label for="content"> Type post content here:</label> <br />
+        <textarea
+        name="content"
+        rows="4"
+        cols="50"
+        placeholder="Enter text..."
+         ></textarea
+         ><br />
+      <button>Add</button>
+    </form>
+    <form action="/{{user_id}}"><button>Cancel</button></form>
+  </body>
+</html>
