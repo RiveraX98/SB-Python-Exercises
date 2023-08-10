@@ -4,15 +4,22 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{% block title %}{% endblock %}</title>
+    <title>Homepage</title>
   </head>
-
   <body>
     <nav>
       <a href="/users">Users</a>
       <a href="/posts">Posts</a>
       <a href="/tags">Tags</a>
     </nav>
-    {% block content %} {% endblock %}
+    <h1>Blogly</h1>
+    <hr />
+    <h2>Recent Post:</h2>
+    {%for post in posts%}
+    <h3>{{post.title}}</h3>
+    <p>{{post.content}}</p>
+    <b>Tags:</b>
+    {%for tag in post.tags%}<a href="/tag/{{tag.id}}">{{tag.name}} </a
+    >{%endfor%} {%endfor%}
   </body>
 </html>

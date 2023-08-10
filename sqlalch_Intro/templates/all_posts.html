@@ -1,0 +1,14 @@
+{% extends "base.html"%} {%block title%}All Posts{%endblock%}{%block content%}
+
+<h1>All Posts:</h1>
+<form action="/users">
+  <ul>
+    {%for post in posts%}
+    <li>
+      <a href="/posts/{{post.id}}">{{post.title}}</a>
+    </li>
+    {%endfor%}
+  </ul>
+  <button>Home</button>
+</form>
+{%endblock%}

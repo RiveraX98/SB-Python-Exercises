@@ -20,6 +20,15 @@
         placeholder="Enter text..."
          ></textarea
          ><br />
+         {%for tag in tags %}
+
+         <div>
+          <label>
+          <input type="checkbox" name="tags" value="{{tag.id}}" id="tag_{{ tag.id }}">
+          {{tag.name}}</label>
+        </div>
+
+        {%endfor%}
       <button>Add</button>
     </form>
     <form action="/{{user_id}}"><button>Cancel</button></form>
