@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listings</title>
+</head>
+<body>
+
+    <nav><a href="/add_pet">Add Pet to Registry</a></nav>
+    <h1>Pets for Adoption</h1>
+    <div>
+        {%for pet in pets%}
+        {%if pet.photo_url%}
+        <img src="{{pet.photo_url}}" style="width: 100px; height: 100px" />
+        {%endif%}
+        <p>
+        <a href="/{{pet.id}}">{{pet.name}}</a> is <b>available</b></p>
+    </div>
+    {%endfor%}
+</body>
+</html>
